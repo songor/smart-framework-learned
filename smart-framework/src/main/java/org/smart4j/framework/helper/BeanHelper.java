@@ -7,12 +7,17 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 管理 Bean
+ * 维护 Bean 类与 Bean 实例的映射关系
  */
 public final class BeanHelper {
 
     private static final Map<Class<?>, Object> BEAN_MAP = new HashMap<>();
 
+    /**
+     * 首先获取所有被 Smart 框架管理的 Bean 类，此时需要调用 {@link ClassHelper#getBeanClassSet()} 方法，
+     * 随后循环调用 {@link ReflectionUtil#newInstance(Class)} 方法，根据类来实例化对象，
+     * 最后将每次创建的对象存放在一个静态的 Map 中。
+     */
     static {
         Set<Class<?>> beanClassSet = ClassHelper.getBeanClassSet();
         for (Class<?> beanClass : beanClassSet) {

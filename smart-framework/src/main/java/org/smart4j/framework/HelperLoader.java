@@ -6,6 +6,9 @@ import org.smart4j.framework.helper.ControllerHelper;
 import org.smart4j.framework.helper.IocHelper;
 import org.smart4j.framework.util.ClassUtil;
 
+/**
+ * 加载 Helper 类
+ */
 public final class HelperLoader {
 
     public static void init() {

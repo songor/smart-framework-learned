@@ -8,15 +8,30 @@ import org.smart4j.demo.CustomService;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@DisplayName("管理 Bean 测试")
+@DisplayName("维护 Bean 类与 Bean 实例的映射关系测试")
 class BeanHelperTest {
 
     @Test
-    @DisplayName("获取被 Smart 框架管理的 Bean 映射")
-    void getBeanMap() {
+    @DisplayName("获取被 Smart 框架维护的 Bean 类与 Bean 实例映射")
+    void shouldGetBeanMapSuccess() {
         Map<Class<?>, Object> beanMap = BeanHelper.getBeanMap();
-        assertThat(beanMap).isNotEmpty().containsKeys(CustomController.class, CustomService.class);
+        assertThat(beanMap).isNotEmpty();
+    }
+
+    @Test
+    @DisplayName("获取被 Smart 框架维护的 Bean 实例")
+    void shouldGetBeanSuccess() {
+        assertThat(BeanHelper.getBean(CustomController.class)).isNotNull();
+        assertThat(BeanHelper.getBean(CustomService.class)).isNotNull();
+    }
+
+    @Test
+    @DisplayName("获取未被 Smart 框架维护的 Bean 实例")
+    void shouldThrowExceptionWhenBeanNotExist() {
+        assertThatThrownBy(() -> BeanHelper.getBean(BeanHelperTest.class)).isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("Can't get bean by class");
     }
 
 }

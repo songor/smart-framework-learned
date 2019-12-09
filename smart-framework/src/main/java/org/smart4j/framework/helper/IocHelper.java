@@ -17,6 +17,12 @@ public final class IocHelper {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IocHelper.class);
 
+    /**
+     * （1）通过 {@link BeanHelper#getBeanMap()} 获取 Bean 类与 Bean 实例之间的映射关系
+     * （2）遍历这个映射关系，分别取出 Bean 类与 Bean 实例，进而通过反射获取类中所有的成员变量
+     * （3）继续遍历这些成员变量，在循环中判断当前成员变量是否带有 {@link Inject} 注解，若带有该注解，则从 Bean Map 中取出 Bean 实例，
+     * 最后通过 {@link ReflectionUtil#setField(Object, Field, Object)} 方法来修改当前成员变量的值
+     */
     static {
         Map<Class<?>, Object> beanMap = BeanHelper.getBeanMap();
         if (MapUtils.isNotEmpty(beanMap)) {
@@ -29,13 +35,20 @@ public final class IocHelper {
                         if (beanField.isAnnotationPresent(Inject.class)) {
                             Class<?> beanFieldClass = beanField.getType();
                             Object beanFieldInstance = beanMap.get(beanFieldClass);
-                            ReflectionUtil.setField(beanInstance, beanField, beanFieldInstance);
+                            if (beanFieldInstance != null) {
+                                ReflectionUtil.setField(beanInstance, beanField, beanFieldInstance);
+                            } else {
+                                LOGGER.error("Smart framework do not contains bean instance of class: " + beanFieldClass.getName());
+                                throw new RuntimeException("Bean instance does not exist");
+                            }
                         }
                     }
+                } else {
+                    LOGGER.warn("This bean class does not have any fields: " + beanClass.getName());
                 }
             }
         } else {
-            LOGGER.warn("Smart framework does not manage any mapping between Class and Bean");
+            LOGGER.warn("Smart framework does not manage any mapping between bean class and bean instance");
         }
     }
 

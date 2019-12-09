@@ -12,16 +12,22 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 类操作工具类
+ * 提供与类操作相关的方法
  */
 public final class ClassUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtil.class);
 
+    /**
+     * 获取类加载器
+     */
     public static ClassLoader getClassLoader() {
         return Thread.currentThread().getContextClassLoader();
     }
 
+    /**
+     * 加载类
+     */
     public static Class<?> loadClass(String className, boolean isInitialized) {
         Class<?> cls;
         try {
@@ -33,6 +39,9 @@ public final class ClassUtil {
         return cls;
     }
 
+    /**
+     * 获取指定包名下的所有类
+     */
     public static Set<Class<?>> getClassSet(String packageName) {
         if (StringUtils.isEmpty(packageName)) {
             LOGGER.error("packageName: " + packageName);

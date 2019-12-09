@@ -1,5 +1,6 @@
 package org.smart4j.framework.helper;
 
+import org.smart4j.framework.ConfigConstant;
 import org.smart4j.framework.annotation.Controller;
 import org.smart4j.framework.annotation.Service;
 import org.smart4j.framework.util.ClassUtil;
@@ -8,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 获取类集合
+ * 获取应用包名 {@link ConfigConstant#APP_BASE_PACKAGE} 下的类
  */
 public final class ClassHelper {
 

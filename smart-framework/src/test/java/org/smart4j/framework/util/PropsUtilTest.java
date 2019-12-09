@@ -9,28 +9,27 @@ import java.util.Properties;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@DisplayName("Properties 工具类测试")
+@DisplayName("读取 properties 配置文件测试")
 class PropsUtilTest {
 
     @Test
-    @DisplayName("正确加载 Properties 文件")
-    void shouldLoadPropsSuccessWhenVaildFile() {
-        final String validPropsFile = "smart.properties";
-        Properties props = PropsUtil.loadProps(validPropsFile);
+    @DisplayName("正确加载 properties 配置文件")
+    void shouldLoadPropsSuccess() {
+        Properties props = PropsUtil.loadProps("smart.properties");
         assertThat(props).containsKeys(ConfigConstant.JDBC_DRIVER, ConfigConstant.JDBC_URL,
                 ConfigConstant.JDBC_USERNAME, ConfigConstant.JDBC_PASSWORD);
     }
 
     @Test
-    @DisplayName("不存在的 Properties 文件")
-    void shouldThrowExceptionWhenNonExistFile() {
+    @DisplayName("加载的 properties 配置文件不存在")
+    void shouldThrowExceptionWhenFileNotExist() {
         final String nonExistPropsFile = "smart-non-exist.properties";
         assertThatThrownBy(() -> PropsUtil.loadProps(nonExistPropsFile)).isInstanceOf(RuntimeException.class)
                 .hasMessage("File don't exist");
     }
 
     @Test
-    @DisplayName("getString() 方法返回真实值")
+    @DisplayName("获取字符型属性真实值")
     void shouldGetActualValueWhenExist() {
         Properties props = new Properties();
         props.put("key", "value");
@@ -38,7 +37,7 @@ class PropsUtilTest {
     }
 
     @Test
-    @DisplayName("getString() 方法返回默认值")
+    @DisplayName("获取字符型属性默认值")
     void shouldGetEmptyWhenNonExist() {
         assertThat("").isEqualTo(PropsUtil.getString(new Properties(), "non-exist-key"));
     }

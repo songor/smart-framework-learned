@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
- * 反射工具类
+ * 反射工具类，封装 Java 反射相关的 API
  */
 public final class ReflectionUtil {
 

@@ -6,7 +6,7 @@ import org.smart4j.framework.util.PropsUtil;
 import java.util.Properties;
 
 /**
- * 读取 smart.properties 配置文件
+ * 读取 smart.properties 配置文件中的配置项
  */
 public final class ConfigHelper {
 

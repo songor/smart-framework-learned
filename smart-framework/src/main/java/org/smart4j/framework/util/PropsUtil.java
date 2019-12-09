@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Properties 工具类
+ * 读取 properties 配置文件
  */
 public final class PropsUtil {
 
@@ -16,7 +16,7 @@ public final class PropsUtil {
 
     public static Properties loadProps(String fileName) {
         Properties props;
-        try (InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)) {
+        try (InputStream is = ClassUtil.getClassLoader().getResourceAsStream(fileName)) {
             if (is == null) {
                 LOGGER.error("fileName: " + fileName);
                 throw new RuntimeException("File don't exist");

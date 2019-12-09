@@ -7,12 +7,12 @@ import org.smart4j.framework.bean.Handler;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("管理请求与处理映射测试")
+@DisplayName("维护请求与处理器的映射关系测试")
 class ControllerHelperTest {
 
     @Test
-    @DisplayName("正确解析请求与处理映射")
-    void shouldGetMappingSuccess() throws ClassNotFoundException {
+    @DisplayName("解析 CustomController 中请求与处理器的映射关系")
+    public void shouldGetHandlerSuccess() throws ClassNotFoundException {
         Class.forName(ControllerHelper.class.getName());
         Handler handler = ControllerHelper.getHandler("get", "/custom");
         assertThat(handler).isNotNull();

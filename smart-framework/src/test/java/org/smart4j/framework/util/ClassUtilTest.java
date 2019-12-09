@@ -8,12 +8,12 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@DisplayName("类操作工具类测试")
+@DisplayName("类操作相关的方法测试")
 class ClassUtilTest {
 
     @Test
-    @DisplayName("获取包下所有类")
-    void shouldGetClassesSuccessWhenPackageValid() {
+    @DisplayName("获取指定包名下的所有类")
+    void shouldGetClassesSuccess() {
         Set<Class<?>> classSet = ClassUtil.getClassSet("org.smart4j.framework");
         assertThat(classSet).isNotEmpty().contains(ClassUtilTest.class);
 
@@ -23,7 +23,7 @@ class ClassUtilTest {
 
     @Test
     @DisplayName("包名不存在")
-    void shouldGetEmptyWhenPackageNonExist() {
+    void shouldGetEmptyWhenPackageNotExist() {
         Set<Class<?>> classSet = ClassUtil.getClassSet("org.smart4j.framework.non-exist");
         assertThat(classSet).isEmpty();
     }

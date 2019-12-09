@@ -6,6 +6,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.smart4j.framework.annotation.Action;
+import org.smart4j.framework.annotation.Controller;
 import org.smart4j.framework.bean.Handler;
 import org.smart4j.framework.bean.Request;
 
@@ -15,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 管理请求与处理映射
+ * 维护请求 {@link Request} 与处理器 {@link Handler} 的映射关系
  */
 public final class ControllerHelper {
 
@@ -23,6 +24,10 @@ public final class ControllerHelper {
 
     private static final Map<Request, Handler> ACTION_MAP = new HashMap<>();
 
+    /**
+     * 通过 {@link ClassHelper} 来获取所有带有 {@link Controller} 注解的类，接着遍历这些类，从 {@link Action} 注解中提取 URL，
+     * 最后初始化 {@link Request} 与 {@link Handler} 的映射关系
+     */
     static {
         Set<Class<?>> controllerClassSet = ClassHelper.getControllerClassSet();
         if (CollectionUtils.isNotEmpty(controllerClassSet)) {
@@ -43,6 +48,7 @@ public final class ControllerHelper {
                             } else {
                                 LOGGER.error("Incorrect pattern for @Action, class is: " + controllerClass.getName()
                                         + ", method is: " + controllerMethod.getName() + ", mapping is: " + mapping);
+                                throw new RuntimeException("Incorrect @Action pattern");
                             }
                         }
                     }
