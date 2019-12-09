@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 管理请求与处理映射关系
+ * 管理请求与处理映射
  */
 public final class ControllerHelper {
 

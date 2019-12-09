@@ -1,5 +1,6 @@
 package org.smart4j.demo;
 
+import org.smart4j.framework.annotation.Action;
 import org.smart4j.framework.annotation.Controller;
 import org.smart4j.framework.annotation.Inject;
 
@@ -11,6 +12,11 @@ public class CustomController {
 
     public CustomService getCustomService() {
         return customService;
+    }
+
+    @Action("get:/custom")
+    public void custom() {
+
     }
 
 }
