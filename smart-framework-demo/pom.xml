@@ -6,8 +6,10 @@
     <groupId>org.smart4j</groupId>
     <artifactId>smart-framework-demo</artifactId>
     <version>1.0.0</version>
+    <packaging>war</packaging>
 
     <dependencies>
+        <!-- Smart Framework -->
         <dependency>
             <groupId>org.smart4j</groupId>
             <artifactId>smart-framework</artifactId>
@@ -17,6 +19,7 @@
 
     <build>
         <plugins>
+            <!-- Tomcat Plugin -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
