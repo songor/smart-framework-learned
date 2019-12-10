@@ -1,4 +1,4 @@
-package org.smart4j.proxy.cglib;
+package org.smart4j.proxy.jdk;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,13 +7,13 @@ import org.smart4j.proxy.HelloImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("CGLib 代理测试")
-class CGLibProxyTest {
+@DisplayName("JDK 动态代理测试")
+public class JdkDynamicProxyTest {
 
     @Test
     public void test() {
-        Hello helloProxy = CGLibProxy.getInstance().getProxy(HelloImpl.class);
-        assertThat(helloProxy.hello("CGLib")).isEqualTo("Hello CGLib");
+        Hello proxy = new JdkDynamicProxy(new HelloImpl()).getProxy();
+        assertThat(proxy.hello("JDK")).isEqualTo("Hello JDK");
     }
 
 }

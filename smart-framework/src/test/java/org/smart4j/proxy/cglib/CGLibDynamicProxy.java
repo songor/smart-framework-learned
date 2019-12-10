@@ -7,16 +7,16 @@ import net.sf.cglib.proxy.MethodProxy;
 import java.lang.reflect.Method;
 
 /**
- * CGLib 代理
+ * CGLib 动态代理
  */
-public class CGLibProxy implements MethodInterceptor {
+public class CGLibDynamicProxy implements MethodInterceptor {
 
-    private static final CGLibProxy instance = new CGLibProxy();
+    private static final CGLibDynamicProxy instance = new CGLibDynamicProxy();
 
-    private CGLibProxy() {
+    private CGLibDynamicProxy() {
     }
 
-    public static CGLibProxy getInstance() {
+    public static CGLibDynamicProxy getInstance() {
         return instance;
     }
 

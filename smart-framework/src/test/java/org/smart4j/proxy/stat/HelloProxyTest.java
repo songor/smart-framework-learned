@@ -11,8 +11,8 @@ class HelloProxyTest {
 
     @Test
     public void test() {
-        HelloProxy helloProxy = new HelloProxy(new HelloImpl());
-        assertThat(helloProxy.hello("Static")).isEqualTo("Hello Static");
+        HelloProxy proxy = new HelloProxy(new HelloImpl());
+        assertThat(proxy.hello("Static")).isEqualTo("Hello Static");
     }
 
 }
