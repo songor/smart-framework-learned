@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class HelloProxyTest {
 
     @Test
-    public void test() {
+    void test() {
         HelloProxy proxy = new HelloProxy(new HelloImpl());
         assertThat(proxy.hello("Static")).isEqualTo("Hello Static");
     }

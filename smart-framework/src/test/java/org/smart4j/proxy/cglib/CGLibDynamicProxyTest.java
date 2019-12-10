@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CGLibDynamicProxyTest {
 
     @Test
-    public void test() {
+    void test() {
         Hello proxy = CGLibDynamicProxy.getInstance().getProxy(HelloImpl.class);
         assertThat(proxy.hello("CGLib")).isEqualTo("Hello CGLib");
     }

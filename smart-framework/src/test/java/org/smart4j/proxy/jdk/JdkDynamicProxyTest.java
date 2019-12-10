@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class JdkDynamicProxyTest {
 
     @Test
-    public void test() {
+    void test() {
         Hello proxy = new JdkDynamicProxy(new HelloImpl()).getProxy();
         assertThat(proxy.hello("JDK")).isEqualTo("Hello JDK");
     }
