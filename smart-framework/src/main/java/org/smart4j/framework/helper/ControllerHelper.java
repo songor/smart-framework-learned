@@ -7,8 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.smart4j.framework.annotation.Action;
 import org.smart4j.framework.annotation.Controller;
-import org.smart4j.framework.bean.Handler;
-import org.smart4j.framework.bean.Request;
+import org.smart4j.framework.bean.*;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -37,6 +36,15 @@ public final class ControllerHelper {
                     for (Method controllerMethod : controllerMethods) {
                         if (controllerMethod.isAnnotationPresent(Action.class)) {
                             Action action = controllerMethod.getAnnotation(Action.class);
+                            if (!(controllerMethod.getParameterCount() == 1 &&
+                                    controllerMethod.getParameterTypes()[0] == Param.class) ||
+                                    !(controllerMethod.getReturnType() == Data.class ||
+                                            controllerMethod.getReturnType() == View.class)) {
+                                LOGGER.error("Incorrect pattern for @Action, class is: " + controllerClass.getName()
+                                        + ", method is: " + controllerMethod.getName()
+                                        + ", returnType is: " + controllerMethod.getReturnType().getName());
+                                throw new RuntimeException("Incorrect @Action method define");
+                            }
                             String mapping = action.value();
                             if (mapping.matches("\\w+:/\\w*")) {
                                 String[] array = mapping.split(":");
