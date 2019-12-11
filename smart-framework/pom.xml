@@ -76,7 +76,6 @@
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
             <version>3.3.0</version>
-            <scope>test</scope>
         </dependency>
         <!-- Junit 5 -->
         <dependency>
