@@ -2,8 +2,10 @@ package org.smart4j.framework.helper;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.smart4j.demo.ControllerTimeIntervalAspect;
 import org.smart4j.demo.CustomController;
 import org.smart4j.demo.CustomService;
+import org.smart4j.framework.proxy.AspectProxy;
 
 import java.util.Set;
 
@@ -38,6 +40,13 @@ class ClassHelperTest {
     void shouldGetBeanClassSetSuccess() {
         Set<Class<?>> classSet = ClassHelper.getBeanClassSet();
         assertThat(classSet).isNotEmpty().contains(CustomController.class, CustomService.class);
+    }
+
+    @Test
+    @DisplayName("获取 org.smart4j.demo 下所有继承 AspectProxy 类")
+    void shouldGetProxyClassSetSuccess() {
+        Set<Class<?>> classSet = ClassHelper.getClassSetBySuper(AspectProxy.class);
+        assertThat(classSet).isNotEmpty().contains(ControllerTimeIntervalAspect.class);
     }
 
 }
