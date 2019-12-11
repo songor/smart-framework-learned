@@ -6,6 +6,7 @@ import org.smart4j.framework.annotation.Aspect;
 import org.smart4j.framework.proxy.AspectProxy;
 import org.smart4j.framework.proxy.Proxy;
 import org.smart4j.framework.proxy.ProxyManager;
+import org.smart4j.framework.util.ReflectionUtil;
 
 import java.lang.annotation.Annotation;
 import java.util.*;
@@ -63,12 +64,7 @@ public final class AopHelper {
             Class<?> proxyClass = entry.getKey();
             Set<Class<?>> targetClassSet = entry.getValue();
             for (Class<?> targetClass : targetClassSet) {
-                Proxy proxy;
-                try {
-                    proxy = (Proxy) proxyClass.newInstance();
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+                Proxy proxy = (Proxy) ReflectionUtil.newInstance(proxyClass);
                 if (targetMap.containsKey(targetClass)) {
                     targetMap.get(targetClass).add(proxy);
                 } else {

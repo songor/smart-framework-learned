@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("请求转发器测试")
-public class DispatcherServletTest {
+class DispatcherServletTest {
 
     @Mock
     HttpServletRequest request;
@@ -30,7 +30,7 @@ public class DispatcherServletTest {
 
     @Test
     @DisplayName("返回 JSON 对象")
-    public void shouldReturnDataSuccess() throws ServletException, IOException {
+    void shouldReturnDataSuccess() throws ServletException, IOException {
         when(request.getMethod()).thenReturn("get");
         when(request.getPathInfo()).thenReturn("/custom");
 
@@ -51,7 +51,7 @@ public class DispatcherServletTest {
 
     @Test
     @DisplayName("返回空 JSON 对象")
-    public void shouldReturnEmptyDataSuccess() throws ServletException, IOException {
+    void shouldReturnEmptyDataSuccess() throws ServletException, IOException {
         when(request.getMethod()).thenReturn("get");
         when(request.getPathInfo()).thenReturn("/custom_empty");
 
@@ -72,7 +72,7 @@ public class DispatcherServletTest {
 
     @Test
     @DisplayName("不匹配的请求路径")
-    public void shouldReturn404WhenMismatchedRequestPath() throws ServletException, IOException {
+    void shouldReturn404WhenMismatchedRequestPath() throws ServletException, IOException {
         when(request.getMethod()).thenReturn("get");
         when(request.getPathInfo()).thenReturn("/undefined");
 
@@ -84,7 +84,7 @@ public class DispatcherServletTest {
 
     @Test
     @DisplayName("未正确赋值的 View 路径")
-    public void shouldThrowExceptionWhenIncorrectViewPath() throws ServletException, IOException {
+    void shouldThrowExceptionWhenIncorrectViewPath() {
         when(request.getMethod()).thenReturn("get");
         when(request.getPathInfo()).thenReturn("/incorrect_view_path");
 
