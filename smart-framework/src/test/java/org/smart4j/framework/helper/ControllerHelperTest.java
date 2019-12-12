@@ -18,6 +18,11 @@ class ControllerHelperTest {
         assertThat(handler).isNotNull();
         assertThat(handler.getControllerClass()).isEqualTo(CustomController.class);
         assertThat(handler.getActionMethod().getName()).isEqualTo("custom");
+
+        handler = ControllerHelper.getHandler("get", "/custom_with_param");
+        assertThat(handler).isNotNull();
+        assertThat(handler.getControllerClass()).isEqualTo(CustomController.class);
+        assertThat(handler.getActionMethod().getName()).isEqualTo("customWithParam");
     }
 
 }

@@ -36,10 +36,8 @@ public final class ControllerHelper {
                     for (Method controllerMethod : controllerMethods) {
                         if (controllerMethod.isAnnotationPresent(Action.class)) {
                             Action action = controllerMethod.getAnnotation(Action.class);
-                            if (!(controllerMethod.getParameterCount() == 1 &&
-                                    controllerMethod.getParameterTypes()[0] == Param.class) ||
-                                    !(controllerMethod.getReturnType() == Data.class ||
-                                            controllerMethod.getReturnType() == View.class)) {
+                            if (!(controllerMethod.getReturnType() == Data.class ||
+                                    controllerMethod.getReturnType() == View.class)) {
                                 LOGGER.error("Incorrect pattern for @Action, class is: " + controllerClass.getName()
                                         + ", method is: " + controllerMethod.getName()
                                         + ", returnType is: " + controllerMethod.getReturnType().getName());

@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -91,6 +94,33 @@ class DispatcherServletTest {
         DispatcherServlet servlet = new DispatcherServlet();
         assertThatThrownBy(() -> servlet.service(request, response)).isInstanceOf(RuntimeException.class)
                 .hasMessage("@View path incorrect");
+    }
+
+    @Test
+    @DisplayName("返回请求参数对象")
+    void shouldReturnRequestParamsSuccess() throws ServletException, IOException {
+        when(request.getMethod()).thenReturn("get");
+        when(request.getPathInfo()).thenReturn("/custom_with_param");
+
+        List<String> parameterNames = new ArrayList<>();
+        parameterNames.add("message");
+        when(request.getParameterNames()).thenReturn(Collections.enumeration(parameterNames));
+
+        when(request.getParameter("message")).thenReturn("It's a custom message");
+
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        when(response.getWriter()).thenReturn(pw);
+
+        DispatcherServlet servlet = new DispatcherServlet();
+        servlet.service(request, response);
+
+        verify(response).setStatus(200);
+        verify(response).setContentType("application/json");
+        verify(response).setCharacterEncoding("UTF-8");
+
+        String result = sw.getBuffer().toString();
+        assertThat(result).isEqualTo("\"{message=It's a custom message}\"");
     }
 
 }

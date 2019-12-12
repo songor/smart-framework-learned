@@ -8,6 +8,8 @@ import org.smart4j.framework.bean.Param;
 import org.smart4j.framework.bean.View;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class CustomController {
@@ -20,23 +22,31 @@ public class CustomController {
     }
 
     @Action("get:/custom")
-    public Data custom(Param param) {
+    public Data custom() {
         return new Data(new CustomResult("It's a custom message"));
     }
 
     @Action("get:/custom_empty")
-    public Data customWithEmpty(Param param) {
+    public Data customWithEmpty() {
         return new Data(null);
     }
 
     @Action("get:/display")
-    public View display(Param param) {
+    public View display() {
         return new View("display", new HashMap<>());
     }
 
     @Action("get:/incorrect_view_path")
-    public View incorrectViewPath(Param param) {
+    public View incorrectViewPath() {
         return new View("", new HashMap<>());
+    }
+
+    @Action("get:/custom_with_param")
+    public Data customWithParam(Param param) {
+        Map<String, Object> paramMap = param.getParamMap();
+        String obj = paramMap.keySet().stream().map(key -> key + "=" + paramMap.get(key))
+                .collect(Collectors.joining(", ", "{", "}"));
+        return new Data(obj);
     }
 
 }

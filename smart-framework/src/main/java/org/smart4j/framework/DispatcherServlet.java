@@ -79,7 +79,12 @@ public class DispatcherServlet extends HttpServlet {
             }
             Param param = new Param(paramMap);
             Method actionMethod = handler.getActionMethod();
-            Object result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
+            Object result;
+            if (param.getParamMap().isEmpty()) {
+                result = ReflectionUtil.invokeMethod(controllerBean, actionMethod);
+            } else {
+                result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
+            }
             Class<?> returnType = actionMethod.getReturnType();
             if (View.class == returnType) {
                 View view = (View) result;

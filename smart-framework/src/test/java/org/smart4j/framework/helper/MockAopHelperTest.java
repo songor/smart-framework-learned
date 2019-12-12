@@ -26,7 +26,7 @@ public class MockAopHelperTest {
 
         Class.forName(AopHelper.class.getName());
         CustomController controller = BeanHelper.getBean(CustomController.class);
-        controller.custom(null);
+        controller.custom();
 
         verify(LOGGER, times(1)).info(anyString());
     }
