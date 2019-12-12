@@ -11,7 +11,7 @@ class ConfigHelperTest {
     @Test
     @DisplayName("读取配置项 smart.framework.jdbc.driver")
     void shouldGetJdbcDriverSuccess() {
-        assertThat("com.mysql.jdbc.Driver").isEqualTo(ConfigHelper.getJdbcDriver());
+        assertThat("com.mysql.cj.jdbc.Driver").isEqualTo(ConfigHelper.getJdbcDriver());
     }
 
     @Test

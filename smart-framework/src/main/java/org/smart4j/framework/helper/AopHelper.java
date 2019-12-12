@@ -3,9 +3,11 @@ package org.smart4j.framework.helper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.smart4j.framework.annotation.Aspect;
+import org.smart4j.framework.annotation.Service;
 import org.smart4j.framework.proxy.AspectProxy;
 import org.smart4j.framework.proxy.Proxy;
 import org.smart4j.framework.proxy.ProxyManager;
+import org.smart4j.framework.proxy.TransactionProxy;
 import org.smart4j.framework.util.ReflectionUtil;
 
 import java.lang.annotation.Annotation;
@@ -52,6 +54,8 @@ public final class AopHelper {
                 LOGGER.warn("This proxy class is not working because of missing annotation @Aspect: " + proxyClass.getName());
             }
         }
+        Set<Class<?>> serviceClassSet = ClassHelper.getClassSetByAnnotation(Service.class);
+        proxyMap.put(TransactionProxy.class, serviceClassSet);
         return proxyMap;
     }
 

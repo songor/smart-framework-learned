@@ -13,4 +13,8 @@ public class Param {
         this.paramMap = paramMap;
     }
 
+    public Map<String, Object> getParamMap() {
+        return paramMap;
+    }
+
 }
