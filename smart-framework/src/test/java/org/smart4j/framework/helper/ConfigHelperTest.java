@@ -17,7 +17,8 @@ class ConfigHelperTest {
     @Test
     @DisplayName("读取配置项 smart.framework.jdbc.url")
     void shouldGetJdbcUrlSuccess() {
-        assertThat("jdbc:mysql://localhost:3306/demo").isEqualTo(ConfigHelper.getJdbcUrl());
+        assertThat("jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC")
+                .isEqualTo(ConfigHelper.getJdbcUrl());
     }
 
     @Test

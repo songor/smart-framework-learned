@@ -18,7 +18,7 @@ class ClassUtilTest {
         assertThat(classSet).isNotEmpty().contains(ClassUtilTest.class);
 
         Set<Class<?>> annotationSet = ClassUtil.getClassSet("org.smart4j.framework.annotation");
-        assertThat(annotationSet).hasSize(4);
+        assertThat(annotationSet).hasSize(6);
     }
 
     @Test
